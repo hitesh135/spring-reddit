@@ -48,10 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			        .permitAll()
 			        .antMatchers(HttpMethod.GET, "/api/posts/**")
 			        .permitAll()
-			        .antMatchers("/v2/api-docs",
+			        .antMatchers("/v3/api-docs",
 			                "/configuration/ui",
 			                "/swagger-resources/**",
 			                "/configuration/security",
+			                "/swagger-ui/**",
 			                "/swagger-ui.html",
 			                "/webjars/**")
 			        .permitAll()
@@ -79,14 +80,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("*"));
-		// or any domain that you want to restrict to
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-		configuration.setAllowedHeaders(Arrays.asList("Authorization"));
-		// Add the method support as you like
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
+//		CorsConfiguration configuration = new CorsConfiguration();
+//		configuration.setAllowedOrigins(Arrays.asList("*"));
+//		// or any domain that you want to restrict to
+//		configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+//		configuration.setAllowedHeaders(Arrays.asList("Authorization"));
+//		// Add the method support as you like
+//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		source.registerCorsConfiguration("/**", configuration);
+//		return source;
+		UrlBasedCorsConfigurationSource source = new
+                UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
 	}
 }
